@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}登陆{% endblock %}
+{% block content %}
+  <h1>登陆</h1>
+  {% if form.errors %}
+    <p>
+      您的账户名或密码有误.
+      请再试一次.
+    </p>
+  {% else %}
+    <p>请使用以下表单登录,如果你没有一个账户可以点这里<a href="{% url "register" %}">注册</a></p>
+  {% endif %}
+  <div class="login-form">
+    <form action="{% url 'login' %}" method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <p><input type="submit" value="登陆"></p>
+    </form>
+    <p><a href="{% url "password_reset" %}">忘记密码?</a></p>
+  </div>
+ {% endblock %}
+
